@@ -1,7 +1,7 @@
 import { Controller } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { PostModel } from './posts.interface';
-import { Get, Param, ParseIntPipe, Post, Body, Put } from '@nestjs/common';
+import { Get, Param, ParseIntPipe, Post, Body, Put, Delete } from '@nestjs/common';
 
 @Controller('posts')
 export class PostsController {
@@ -27,5 +27,9 @@ export class PostsController {
   public update(@Param('id', ParseIntPipe) id: number, @Body() post: PostModel,): PostModel {
     return this.postsService.update(id, post);
   }
-}
 
+  @Delete(':id')
+  public delete(@Param('id', ParseIntPipe) id: number): void {
+    this.postsService.delete(id);
+  }
+}

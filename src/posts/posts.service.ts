@@ -72,4 +72,17 @@ export class PostsService {
 
     return blogPost;
   }
+
+  public delete(id: number): void {
+    Logger.log(`Deleting post with id: ${id}`);
+
+    const index: number = this.posts.findIndex((post) => post.id === id);
+
+    // -1 is returned when no findIndex() match is found
+    if (index === -1) {
+      throw new NotFoundException('Post not found.');
+    }
+
+    this.posts.splice(index, 1);
+  }
 }
